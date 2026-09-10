@@ -1,0 +1,47 @@
+{
+  "name": "finkey-financial-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "next dev -H 127.0.0.1",
+    "build": "next build",
+    "start": "next start -H 127.0.0.1",
+    "test": "npm run test:audit && npm run test:analytics && npm run test:ai && npm run test:rag && npm run typecheck && npm run build && node --test tests/rendered-html.test.mjs",
+    "test:audit:core": "node --experimental-strip-types --test tests/independent-core.test.ts",
+    "test:audit": "node --experimental-strip-types --test tests/independent-core.test.ts tests/answer-contract.test.ts tests/adversarial-contract.test.ts",
+    "test:analytics": "node --experimental-strip-types --test tests/analytics.test.ts",
+    "test:ai": "node --experimental-strip-types --test tests/finkey-ai.test.ts",
+    "test:rag": "node --experimental-strip-types --test tests/rag.test.ts tests/rag-routes.test.ts tests/rag-chunking.test.ts tests/rag-grounding.test.ts",
+    "foundry:setup": "node --experimental-strip-types scripts/setup-foundry.ts",
+    "test:foundry:live": "node --experimental-strip-types scripts/smoke-foundry.ts",
+    "test:rag:live": "node --experimental-strip-types scripts/smoke-rag.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "data:prepare": "node scripts/prepare-data.mjs"
+  },
+  "dependencies": {
+    "foundry-local-sdk": "^1.2.3",
+    "lucide-react": "^1.26.0",
+    "next": "16.2.6",
+    "officeparser": "^7.5.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "recharts": "^3.10.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/papaparse": "^5.5.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "papaparse": "^5.5.4",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.9.3"
+  },
+  "type": "module"
+}
